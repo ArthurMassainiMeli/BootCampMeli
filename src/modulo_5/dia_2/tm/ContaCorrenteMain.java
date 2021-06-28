@@ -1,6 +1,6 @@
 package modulo_5.dia_2.tm;
 
-public class Main {
+public class ContaCorrenteMain {
     public static void main(String[] args) {
         ContaCorrente cc1 = new ContaCorrente(10000.00);
         ContaCorrente cc2 = new ContaCorrente(15000.00);

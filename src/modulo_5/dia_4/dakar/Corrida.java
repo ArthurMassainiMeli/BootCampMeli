@@ -11,6 +11,9 @@ public class Corrida {
     private Integer quantidadeVeiculosPermitidos;
     private List<Veiculo> listaVeiculos = new ArrayList<>();
 
+    private SocorristaCarro sc = new SocorristaCarro();
+    private SocorristaMoto sm = new SocorristaMoto();
+
     // constructor
 
     public Corrida(Integer distancia, Double premioEmDolares, String nome, Integer quantidadeVeiculosPermitidos) {
@@ -19,6 +22,8 @@ public class Corrida {
         this.nome = nome;
         this.quantidadeVeiculosPermitidos = quantidadeVeiculosPermitidos;
     }
+
+    // metodos da classe
 
     public void registrarCarro(Double velocidade, Double aceleracao, Double anguloDeGiro, String placa) {
         if (listaVeiculos.size() < this.quantidadeVeiculosPermitidos) {
@@ -55,8 +60,17 @@ public class Corrida {
                 vencedor = lista.get(i);
             }
         }
-
         return vencedor;
+    }
+
+    public void socorrerCarro(String placa) {
+        List<Veiculo> lista = listaVeiculos.stream().filter(veiculo2 -> veiculo2.getPlaca().equals(placa)).collect(Collectors.toList());
+        sc.socorrer((Carro) lista.get(0));
+    }
+
+    public void socorrerMoto(String placa) {
+        List<Veiculo> lista = listaVeiculos.stream().filter(veiculo2 -> veiculo2.getPlaca().equals(placa)).collect(Collectors.toList());
+        sm.socorrer((Moto) lista.get(0));
     }
 
 

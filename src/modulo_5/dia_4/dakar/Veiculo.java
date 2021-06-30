@@ -8,7 +8,10 @@ public abstract class Veiculo {
     private Double peso;
     private Integer rodas;
 
-    // constructor
+    // constructors
+
+    public Veiculo() {
+    }
 
     public Veiculo(Double velocidade, Double aceleracao, Double anguloDeGiro, String placa, Double peso, Integer rodas) {
         this.velocidade = velocidade;
@@ -18,6 +21,8 @@ public abstract class Veiculo {
         this.peso = peso;
         this.rodas = rodas;
     }
+
+    // Sobreescrita
 
     @Override
     public String toString() {

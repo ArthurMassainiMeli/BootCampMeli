@@ -27,6 +27,9 @@ public class MainDakar {
         Veiculo vencedor = corrida.calcularVencedor(listaDeVeiculos);
         System.out.println("O vencedor é: " +vencedor.getPlaca());
 
+        // Printa socorrendo carro e moto
+        corrida.socorrerCarro("AAA-3333");
+        corrida.socorrerMoto("BBB-5555");
 
 
     }

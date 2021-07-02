@@ -25,4 +25,11 @@ public class MesaController {
         List<Mesa> allMesas = mesaModel.getAllMesas();
         return allMesas;
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mesa deleteById(@PathVariable int id) {
+        Mesa deletedMesa = mesaModel.deleteOne(id);
+        return deletedMesa;
+    }
 }

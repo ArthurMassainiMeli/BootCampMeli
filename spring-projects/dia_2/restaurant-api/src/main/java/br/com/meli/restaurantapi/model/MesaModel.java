@@ -17,4 +17,11 @@ public class MesaModel {
     public void insertOne(Mesa mesa) {
         listaDeMesas.add(mesa);
     }
+
+    public Mesa deleteOne(int id){
+        Optional<Mesa> alunoOptional = listaDeMesas.stream().filter(a -> a.getId() == id).findFirst();
+        int index = listaDeMesas.indexOf(alunoOptional.get());
+        listaDeMesas.remove(index);
+        return alunoOptional.get();
+    }
 }

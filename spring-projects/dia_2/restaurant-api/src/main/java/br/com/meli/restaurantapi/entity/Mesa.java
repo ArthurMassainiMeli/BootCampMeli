@@ -13,7 +13,6 @@ public class Mesa {
         this.listaDePedidos = listaDePedidos;
     }
 
-
     // getters
 
     public int getId() {

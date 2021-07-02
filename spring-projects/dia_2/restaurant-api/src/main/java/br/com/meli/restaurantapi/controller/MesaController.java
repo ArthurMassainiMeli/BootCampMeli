@@ -25,5 +25,4 @@ public class MesaController {
         List<Mesa> allMesas = mesaModel.getAllMesas();
         return allMesas;
     }
-
 }

@@ -5,16 +5,14 @@ import java.util.*;
 public class Pedido {
     private int id;
     private int mesa;
-    private List<Prato> listaDePratos = new ArrayList<>();
-    //private double valorTotaldoPedido;
+    private List<Prato> listaDePratos;
+    private double valorTotaldoPedido;
 
-    public Pedido(int id, int mesa, List<Prato> listaDePratos, double valorTotaldoPedido) {
+    public Pedido(int id, int mesa, List<Prato> listaDePratos) {
         this.id = id;
         this.mesa = mesa;
         this.listaDePratos = listaDePratos;
-        //this.valorTotaldoPedido = valorTotaldoPedido;
     }
-
 
     //getters
 
@@ -30,7 +28,9 @@ public class Pedido {
         return listaDePratos;
     }
 
-    //public double getValorTotal() {
-     //   return valorTotaldoPedido;
-   // }
+    public double getValorTotalDoPedido() {
+        double valor = listaDePratos.stream().mapToDouble(prato -> prato.getPreco() * prato.getQuantidade()).sum();
+        this.valorTotaldoPedido = valor;
+        return valorTotaldoPedido;
+    }
 }

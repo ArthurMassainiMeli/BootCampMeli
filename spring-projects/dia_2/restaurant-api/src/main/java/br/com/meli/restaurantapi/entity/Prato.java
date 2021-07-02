@@ -13,8 +13,6 @@ public class Prato {
         this.quantidade = quantidade;
     }
 
-
-
     // getters
 
     public int getId() {

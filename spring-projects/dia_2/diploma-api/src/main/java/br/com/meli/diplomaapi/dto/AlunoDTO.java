@@ -3,15 +3,15 @@ package br.com.meli.diplomaapi.dto;
 import br.com.meli.diplomaapi.entity.Aluno;
 import br.com.meli.diplomaapi.entity.Disciplina;
 import br.com.meli.diplomaapi.repository.AlunoRepository;
+import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Validated
 public class AlunoDTO {
 
     @NotBlank(message = "O campo nome é obrigatório")
@@ -19,6 +19,7 @@ public class AlunoDTO {
     @Pattern(regexp = "[A-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+", message = "O campo nome deve possuir apenas letras")
     private String nome;
 
+    @Valid
     @NotNull(message = "O campo disciplinas é obrigatorio")
     private List<Disciplina> disciplinas;
 
@@ -31,6 +32,9 @@ public class AlunoDTO {
         this.nome = nome;
         this.disciplinas = disciplinas;
     }
+
+    // DTO methods
+
 
     public static AlunoDTO converte(Aluno aluno) {
         return new AlunoDTO(aluno.getNome(), aluno.getDisciplinas());
@@ -55,7 +59,7 @@ public class AlunoDTO {
     }
 
     public String getMessage() {
-        return "Sua média foi " + getMedia();
+        return "Diploma gerado com sucesso! Sua média foi " + getMedia();
     }
 
     // getters and setters

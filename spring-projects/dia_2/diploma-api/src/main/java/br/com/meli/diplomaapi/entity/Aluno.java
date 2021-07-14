@@ -3,11 +3,11 @@ package br.com.meli.diplomaapi.entity;
 import java.util.List;
 
 public class Aluno {
-    private Integer id;
+    private int id;
     private String nome;
     private List<Disciplina> disciplinas;
 
-    public Aluno(Integer id, String nome, List<Disciplina> disciplinas) {
+    public Aluno(int id, String nome, List<Disciplina> disciplinas) {
         this.id = id;
         this.nome = nome;
         this.disciplinas = disciplinas;
@@ -29,11 +29,11 @@ public class Aluno {
         this.disciplinas = disciplinas;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

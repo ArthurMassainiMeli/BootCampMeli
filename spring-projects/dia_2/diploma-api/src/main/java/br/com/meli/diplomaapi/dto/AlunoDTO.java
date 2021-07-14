@@ -2,17 +2,30 @@ package br.com.meli.diplomaapi.dto;
 
 import br.com.meli.diplomaapi.entity.Aluno;
 import br.com.meli.diplomaapi.entity.Disciplina;
-import br.com.meli.diplomaapi.model.AlunoModel;
+import br.com.meli.diplomaapi.repository.AlunoRepository;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AlunoDTO {
-    private String nome;
-    private List<Disciplina> disciplinas = new ArrayList<>();
 
-    // contructor
+    @NotBlank(message = "O campo nome é obrigatório")
+    @Size(min = 8, max = 50, message = "O campo nome deve ter entre 8 e 50 caracteres")
+    @Pattern(regexp = "[A-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+", message = "O campo nome deve possuir apenas letras")
+    private String nome;
+
+    @NotNull(message = "O campo disciplinas é obrigatorio")
+    private List<Disciplina> disciplinas;
+
+    private String message;
+    private double media;
+
+    // constructor
 
     public AlunoDTO(String nome, List<Disciplina> disciplinas) {
         this.nome = nome;
@@ -23,24 +36,26 @@ public class AlunoDTO {
         return new AlunoDTO(aluno.getNome(), aluno.getDisciplinas());
     }
 
-    public static Aluno converte(AlunoDTO alunoDTO, AlunoModel alunoModel) {
-        return new Aluno(alunoModel.getAll().size() + 1, alunoDTO.getNome(), alunoDTO.getDisciplinas());
+    public static Aluno converte(AlunoDTO alunoDTO, AlunoRepository alunoRepository) {
+        int sizeOfList = alunoRepository.getAll().size();
+        int id = 1;
+        if (sizeOfList > 0) {
+            id = alunoRepository.getAll().get(sizeOfList - 1).getId() + 1;
+        }
+        return new Aluno(id, alunoDTO.getNome(), alunoDTO.getDisciplinas());
     }
 
     public static List<AlunoDTO> converte(List<Aluno> alunos) {
         return alunos.stream().map(a -> new AlunoDTO(a.getNome(), a.getDisciplinas())).collect(Collectors.toList());
     }
 
-    public Double getMedia() {
-        Double media = disciplinas.stream().mapToDouble(d -> d.getNota()).average().getAsDouble();
+    public double getMedia() {
+        double media = disciplinas.stream().mapToDouble(d -> d.getNota()).average().getAsDouble();
         return media;
     }
 
     public String getMessage() {
-        if (getMedia() > 9) {
-            return "Parabéns";
-        }
-        return "";
+        return "Sua média foi " + getMedia();
     }
 
     // getters and setters

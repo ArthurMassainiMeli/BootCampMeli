@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class ApiExceptionControllerAdvice {
@@ -26,7 +27,6 @@ public class ApiExceptionControllerAdvice {
                 .status(HttpStatus.CONFLICT)
                 .body(new ExceptionDTO(e.getMessage(), HttpStatus.CONFLICT.value()));
     }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -47,5 +47,12 @@ public class ApiExceptionControllerAdvice {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionDTO("Corpo da requisição mal formatada, tipo invalido", HttpStatus.BAD_REQUEST.value()));
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ExceptionDTO> defaultHandler(NoSuchElementException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ExceptionDTO(e.getMessage(), HttpStatus.NOT_FOUND.value()));
     }
 }

@@ -18,11 +18,7 @@ public class AlunoRepository {
         return aluno;
     }
 
-    public Aluno getById(int id) {
-        Optional<Aluno> alunoOptional = alunos.stream().filter(a -> a.getId() == id).findFirst();
-        if (alunoOptional.isPresent()) {
-            return alunoOptional.get();
-        }
-        return null;
+    public Optional<Aluno> getById(int id) {
+        return alunos.stream().filter(a -> a.getId() == id).findFirst();
     }
 }

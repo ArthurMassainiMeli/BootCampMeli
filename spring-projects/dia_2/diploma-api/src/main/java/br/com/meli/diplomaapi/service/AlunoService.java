@@ -2,14 +2,14 @@ package br.com.meli.diplomaapi.service;
 
 import br.com.meli.diplomaapi.dto.AlunoDTO;
 import br.com.meli.diplomaapi.entity.Aluno;
+import br.com.meli.diplomaapi.entity.Disciplina;
 import br.com.meli.diplomaapi.exception.ExceptionNotApproved;
 import br.com.meli.diplomaapi.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class AlunoService {
@@ -35,6 +35,8 @@ public class AlunoService {
     }
 
     public Aluno getById(int id) {
-        return alunoRepository.getById(id);
+        return alunoRepository
+                .getById(id)
+                .orElseThrow(() -> new NoSuchElementException("Nao encontrado diploma do aluno com o id: " + id));
     }
 }

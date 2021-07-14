@@ -14,6 +14,9 @@ public class Disciplina {
     @Max(value = 10, message = "O campo nota da disciplina tem que estar entre 0 e 10")
     private int nota;
 
+
+    // constructor
+
     public Disciplina(String nome, int nota) {
         this.nome = nome;
         this.nota = nota;

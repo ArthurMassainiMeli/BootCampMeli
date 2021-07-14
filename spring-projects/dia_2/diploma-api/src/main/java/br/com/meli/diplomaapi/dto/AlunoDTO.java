@@ -59,6 +59,9 @@ public class AlunoDTO {
     }
 
     public String getMessage() {
+        if (getMedia() > 9.0) {
+            return "Diploma gerado com sucesso! Sua média foi " + getMedia() + "se formou com louvor";
+        }
         return "Diploma gerado com sucesso! Sua média foi " + getMedia();
     }
 

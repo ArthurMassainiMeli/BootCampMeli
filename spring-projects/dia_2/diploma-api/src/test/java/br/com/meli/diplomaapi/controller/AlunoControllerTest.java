@@ -38,11 +38,10 @@ class AlunoControllerTest {
 
     @Test
     @DisplayName("Retorna uma lista de alunos aprovados e com diploma")
-    void list_DeveRetornarAListaDeTodosOsAlunosComDiploma() {
+    void list_DeveRetornarAListaDeTodosOsAlunosComDiploma() {               
         String expectedNome = createValidAluno().getNome();
 
         List<AlunoDTO> alunos = alunoController.getAllAlunos();
-
 
         Assertions.assertNotNull(alunos);
         Assertions.assertEquals(alunos.size(), 1);

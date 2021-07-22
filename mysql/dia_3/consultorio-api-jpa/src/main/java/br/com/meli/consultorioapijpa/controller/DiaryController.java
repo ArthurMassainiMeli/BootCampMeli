@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/diarys")
 public class DiaryController {
@@ -22,5 +24,11 @@ public class DiaryController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody DiaryDTO diaryDTO){
         diaryService.create(diaryDTO);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<DiaryDTO> findAll(){
+        return diaryService.findAll();
     }
 }

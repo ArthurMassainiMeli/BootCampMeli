@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/dentists")
 public class DentistController {
@@ -21,6 +23,12 @@ public class DentistController {
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody Dentist dentist) {
         dentistService.create(dentist);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Dentist> findAll() {
+        return dentistService.findAll();
     }
 }
 

@@ -8,6 +8,7 @@ import br.com.meli.consultorioapijpa.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -27,7 +28,14 @@ public class DiaryService {
                 .findById(diaryDTO.getDentistId())
                 .orElseThrow(() -> new NoSuchElementException("Dentista nao encontrado"));
 
-        Diary diary = diaryDTO.converte(diaryDTO, dentist);
+        Diary diary = DiaryDTO.converte(diaryDTO, dentist);
         diaryRepository.save(diary);
+    }
+
+    public List<DiaryDTO> findAll() {
+        List<Diary> diarys = diaryRepository.findAll();
+        List<DiaryDTO> diarysDTO = DiaryDTO.converte(diarys);
+
+        return diarysDTO;
     }
 }

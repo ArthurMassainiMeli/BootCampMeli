@@ -2,6 +2,8 @@ package br.com.meli.consultorioapijpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,16 +19,17 @@ public class Diary {
 
     @Column(name = "start_time")
     @JsonAlias("start_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH-mm-ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate startTime;
 
     @Column(name = "ending_time")
     @JsonAlias("ending_time")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH-mm-ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate endingTime;
 
     @ManyToOne
     @JoinColumn(name = "id_dentist")
+    @JsonIgnore
     private Dentist dentist;
 
 

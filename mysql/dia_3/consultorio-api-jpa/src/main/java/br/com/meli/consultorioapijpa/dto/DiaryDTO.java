@@ -6,14 +6,16 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DiaryDTO {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH-mm-ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @JsonAlias("start_time")
     private LocalDate startTime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH-mm-ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @JsonAlias("ending_time")
     private LocalDate endingTime;
 
@@ -22,8 +24,18 @@ public class DiaryDTO {
 
     // DTO methods
 
-    public Diary converte(DiaryDTO diaryDTO, Dentist dentist) {
+    public static Diary converte(DiaryDTO diaryDTO, Dentist dentist) {
         return new Diary(diaryDTO.getStartTime(), diaryDTO.getEndingTime(), dentist);
+    }
+
+    public static DiaryDTO converte(Diary diary) {
+        return new DiaryDTO(diary.getStartTime(), diary.getEndingTime(), diary.getDentist().getIdDestist());
+    }
+
+    public static List<DiaryDTO> converte(List<Diary> diarys) {
+        return diarys.stream()
+                .map(DiaryDTO::converte)
+                .collect(Collectors.toList());
     }
 
     // constructor

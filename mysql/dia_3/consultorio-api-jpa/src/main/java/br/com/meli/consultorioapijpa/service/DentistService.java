@@ -5,6 +5,8 @@ import br.com.meli.consultorioapijpa.repository.DentistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DentistService {
 
@@ -17,5 +19,9 @@ public class DentistService {
 
     public void create(Dentist dentist) {
         dentistRepository.save(dentist);
+    }
+
+    public List<Dentist> findAll(){
+        return dentistRepository.findAll();
     }
 }

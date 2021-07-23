@@ -32,7 +32,6 @@ public class Diary {
     @JsonIgnore
     private Dentist dentist;
 
-
     // constructors
 
     public Diary(LocalDate startTime, LocalDate endingTime, Dentist dentist) {

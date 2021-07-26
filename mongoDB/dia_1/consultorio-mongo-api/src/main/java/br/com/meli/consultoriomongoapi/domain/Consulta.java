@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 
 @Document(collection = "consultorio")
-public class Consultas {
+public class Consulta {
 
     @Id
     private String id;
@@ -22,14 +22,14 @@ public class Consultas {
 
     // constructors
 
-    public Consultas(Patient patient, Doctor doctor, String date, String status) {
+    public Consulta(Patient patient, Doctor doctor, String date, String status) {
         this.patient = patient;
         this.doctor = doctor;
         this.date = date;
         this.status = status;
     }
 
-    public Consultas() {
+    public Consulta() {
 
     }
 
